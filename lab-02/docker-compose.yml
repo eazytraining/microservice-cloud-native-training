@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  monolithic:
+    image: 'monolithic:1.4.4'
+  
+  frontend:
+    ports:
+      - '80:80'
+    image: 'frontend:1.4.4' 
