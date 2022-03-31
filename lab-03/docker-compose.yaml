@@ -1,0 +1,32 @@
+version:  '3'
+services:
+  servicecenter:
+    image: servicecomb/service-center:1.0.0
+  catalog:
+    image: catalog:1.0.0
+    environment:
+      CSE_REGISTRY_ADDR: http://servicecenter:30100
+    links:
+      - servicecenter
+  payment:
+    image: payment:1.0.0 
+    environment:
+      SC_HOST: servicecenter
+    links:
+      - servicecenter
+  mesherfrontend:
+    image: thanda/mesher:osi
+    environment:
+      - CSE_REGISTRY_ADDR=http://servicecenter:30100
+      - SERVICE_NAME=frontend
+      - VERSION=0.0.1
+      - APP_ID=OSIConference
+    ports:
+      - 80:80  
+    links:
+      - servicecenter
+  frontend:
+    image: frontend:1.0.0
+    environment:
+      - http_proxy=127.0.0.1:30101
+    network_mode: "service:mesherfrontend"
