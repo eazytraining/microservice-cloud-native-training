@@ -41,7 +41,7 @@ metadata:
   name: catalog
   namespace: microservices
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: catalog
@@ -68,7 +68,7 @@ metadata:
   name: payment
   namespace: microservices
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: payment
