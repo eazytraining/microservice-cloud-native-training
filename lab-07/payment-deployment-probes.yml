@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: payment
+    tier: backend
+  name: payment
+  namespace: microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: payment
+        tier: backend
+    spec:
+      containers:
+      - env:
+        - name: SC_HOST
+          value: servicecenter
+        image: eazytraining/payment:1.0.0
+        name: payment
